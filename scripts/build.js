@@ -23,7 +23,7 @@ import {bundleScripts, minifyScript} from "../utils/build.node.js";
 
 const PROJECT_PATH = Path.resolve(import.meta.dirname, "..");
 const [, , ...ARGS] = Process.argv;
-const MINIFY = false;
+const MINIFY = true;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // npm run build

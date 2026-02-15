@@ -1,6 +1,10 @@
 
 # CHANGELOG
 
+## 0.40.5 (2026-02-15)
+
+- [Fixed] JS code in NPM bundle is not minified
+
 ## 0.40.4 (2026-02-15)
 
 - Add `grab-button` part to `<x-colorselect>`

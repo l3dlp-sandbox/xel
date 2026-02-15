@@ -1,6 +1,10 @@
 
 # CHANGELOG
 
+## 0.40.4 (2026-02-15)
+
+- Add `grab-button` part to `<x-colorselect>`
+
 ## 0.40.3 (2026-02-03)
 
 - [Fixed] `element.scrollIntoViewIfNeeded()` fails on Firefox

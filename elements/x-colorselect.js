@@ -16,6 +16,7 @@ import {html, css} from "../utils/template.js";
  * @fires ^changeend
  * @fires collapse
  * @part popover
+ * @part grab-button
  */
 export default class XColorSelectElement extends HTMLElement {
   static observedAttributes = ["value", "alpha", "spaces", "disabled", "size"];
@@ -25,7 +26,7 @@ export default class XColorSelectElement extends HTMLElement {
       <div id="preview"></div>
 
       <x-popover id="popover" part="popover" modal>
-        <x-colorpicker id="color-picker"></x-colorpicker>
+        <x-colorpicker id="color-picker" exportparts="grab-button"></x-colorpicker>
       </x-popover>
     </template>
   `;

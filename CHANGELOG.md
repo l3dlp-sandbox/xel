@@ -1,6 +1,10 @@
 
 # CHANGELOG
 
+## 0.40.6 (2026-02-19)
+
+- [Fixed] Button tooltips fail to autohide when using pen/stylus
+
 ## 0.40.5 (2026-02-15)
 
 - [Fixed] JS code in NPM bundle is not minified

@@ -223,6 +223,7 @@ export default class XButtonElement extends HTMLElement {
   #wasFocusedBeforeExpanding = false;
   #dismissTooltip = false;
   #lastPointerDownEvent = null;
+  #autohideTooltipTimeout = null;
   #lastTabIndex = 0;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,7 +241,7 @@ export default class XButtonElement extends HTMLElement {
 
     this.addEventListener("pointerdown", (event) => this.#onPointerDown(event));
     this.addEventListener("pointerenter", (event) => this.#onPointerEnter(event));
-    this.addEventListener("pointerleave", () => this.#onPointerLeave());
+    this.addEventListener("pointerleave", (event) => this.#onPointerLeave(event));
     this.addEventListener("click", (event) => this.#onClick(event));
     this.addEventListener("keydown", (event) => this.#onKeyDown(event));
     this.addEventListener("close", (event) => this.#onClose(event));
@@ -660,10 +661,30 @@ export default class XButtonElement extends HTMLElement {
       }
 
       tooltip.open(this);
+
+      // @bugfix: https://issues.chromium.org/issues/40285392
+      if (event.pointerType === "pen") {
+        if (this.#autohideTooltipTimeout) {
+          clearTimeout(this.#autohideTooltipTimeout);
+        }
+
+        this.#autohideTooltipTimeout = setTimeout(() => {
+          tooltip.close();
+          this.#autohideTooltipTimeout = null;
+        }, 1600);
+      }
     }
   }
 
-  #onPointerLeave() {
+  #onPointerLeave(event) {
+    // @bugfix: https://issues.chromium.org/issues/40285392
+    if (event.pointerType === "pen") {
+      if (this.#autohideTooltipTimeout !== null) {
+        clearTimeout(this.#autohideTooltipTimeout);
+        this.#autohideTooltipTimeout = null;
+      }
+    }
+
     let tooltip = this.querySelector(":scope > x-tooltip");
 
     if (tooltip) {
